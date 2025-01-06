@@ -10,13 +10,14 @@ public abstract class GeneralService<R> {
 
     protected static final Logger logger = LoggerFactory.getLogger(GeneralService.class);
 
+    @Autowired
+    protected PasswordEncoder passwordEncoder;
+
+    @Autowired
+    protected ModelMapper modelMapper;
+
+    @Autowired
     protected R repository;
-
-    @Autowired
-    protected PasswordEncoder passwordEncoder;  // @Autowired ile alıyoruz
-
-    @Autowired
-    protected ModelMapper modelMapper;  // ModelMapper da burada otomatik enjekte edilecek
 
     public String encodePassword(String password) {
         return passwordEncoder.encode(password);

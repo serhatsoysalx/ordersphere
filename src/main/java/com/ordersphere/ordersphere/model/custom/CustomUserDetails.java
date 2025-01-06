@@ -1,6 +1,6 @@
 package com.ordersphere.ordersphere.model.custom;
 
-import com.ordersphere.ordersphere.model.UserModel;
+import com.ordersphere.ordersphere.dto.UserDTO;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -11,23 +11,23 @@ import java.util.stream.Collectors;
 
 public class CustomUserDetails extends User implements UserDetails {
 
-    private final UserModel userModel;
+    private final UserDTO userDTO;
 
-    public CustomUserDetails(UserModel userModel) {
-        super(userModel.getUsername(), userModel.getPasswordHash(), userModel.getUserRules().stream()
-                .map(rule -> new SimpleGrantedAuthority(rule.getRuleName()))
+    public CustomUserDetails(UserDTO userDTO) {
+        super(userDTO.getUsername(), userDTO.getPassword(), userDTO.getRoles().stream()
+                .map(rule -> new SimpleGrantedAuthority(rule.getRoleName()))
                 .collect(Collectors.toList()));
-        this.userModel = userModel;
+        this.userDTO = userDTO;
     }
 
     @Override
     public String getUsername() {
-        return userModel.getUsername();
+        return userDTO.getUsername();
     }
 
     @Override
     public String getPassword() {
-        return userModel.getPasswordHash();
+        return userDTO.getPassword();
     }
 
     @Override
@@ -50,14 +50,14 @@ public class CustomUserDetails extends User implements UserDetails {
         return true;
     }
 
-    public UserModel getUserModel() {
-        return userModel;
+    public UserDTO getUserModel() {
+        return userDTO;
     }
 
     @Override
     public Collection<GrantedAuthority> getAuthorities() {
-        return userModel.getUserRules().stream()
-                .map(rule -> new SimpleGrantedAuthority(rule.getRuleName()))
+        return userDTO.getRoles().stream()
+                .map(rule -> new SimpleGrantedAuthority(rule.getRoleName()))
                 .collect(Collectors.toSet());
     }
 }

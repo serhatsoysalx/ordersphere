@@ -1,4 +1,4 @@
-package com.ordersphere.ordersphere.configuration;
+package com.ordersphere.ordersphere.general;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
