@@ -8,7 +8,7 @@ import com.ordersphere.ordersphere.general.GeneralService;
 import com.ordersphere.ordersphere.repository.IUserRepository;
 import com.ordersphere.ordersphere.service.custom.CustomUserDetailsService;
 import com.ordersphere.ordersphere.util.constants.LoginErrorMessage;
-import com.ordersphere.ordersphere.util.expections.UserAlreadyExistsException;
+import com.ordersphere.ordersphere.util.expections.InvalidCredentialsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -27,9 +27,9 @@ public class LoginService extends GeneralService<IUserRepository> {
     public UserDTO login(LoginRequestDto loginRequestDto) {
         final UserDetails customUser = customUserDetailsService.loadUserByUsername(loginRequestDto.getUsername());
 
-        if (Objects.nonNull(customUser) && customUserDetailsService.validatePassword(loginRequestDto.getPassword(), customUser.getPassword())) {
+        if (Objects.nonNull(customUser) && passwordEncoder.matches(loginRequestDto.getPassword(), customUser.getPassword())) {
+            Optional<User> user = repository.findByUsername(customUser.getUsername());
 
-            Optional<User> user = repository.findByUsernameAndPassword(customUser.getUsername(), customUser.getPassword());
             if (user.isPresent()) {
                 User userEntity = user.get();
                 UserDTO userDTO = modelMapper.map(userEntity, UserDTO.class);
@@ -41,7 +41,7 @@ public class LoginService extends GeneralService<IUserRepository> {
                 return userDTO;
             }
         }
-        throw new UserAlreadyExistsException(LoginErrorMessage.INVALID_CREDENTIALS);
-    }
 
+        throw new InvalidCredentialsException(LoginErrorMessage.INVALID_CREDENTIALS);
+    }
 }
