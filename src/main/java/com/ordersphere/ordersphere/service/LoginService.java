@@ -1,6 +1,6 @@
 package com.ordersphere.ordersphere.service;
 
-import com.ordersphere.ordersphere.dto.LoginRequestDto;
+import com.ordersphere.ordersphere.dto.LoginRequestDTO;
 import com.ordersphere.ordersphere.dto.RoleDTO;
 import com.ordersphere.ordersphere.dto.UserDTO;
 import com.ordersphere.ordersphere.entity.User;
@@ -24,10 +24,10 @@ public class LoginService extends GeneralService<IUserRepository> {
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
 
-    public UserDTO login(LoginRequestDto loginRequestDto) {
-        final UserDetails customUser = customUserDetailsService.loadUserByUsername(loginRequestDto.getUsername());
+    public UserDTO login(LoginRequestDTO loginRequestDTO) {
+        final UserDetails customUser = customUserDetailsService.loadUserByUsername(loginRequestDTO.getUsername());
 
-        if (Objects.nonNull(customUser) && passwordEncoder.matches(loginRequestDto.getPassword(), customUser.getPassword())) {
+        if (Objects.nonNull(customUser) && passwordEncoder.matches(loginRequestDTO.getPassword(), customUser.getPassword())) {
             Optional<User> user = repository.findByUsername(customUser.getUsername());
 
             if (user.isPresent()) {

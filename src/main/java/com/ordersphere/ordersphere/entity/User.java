@@ -1,8 +1,10 @@
 package com.ordersphere.ordersphere.entity;
 
+import com.ordersphere.ordersphere.entity.product.ProductReview;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -33,6 +35,9 @@ public class User extends BaseEntity{
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    @OneToMany(mappedBy = "user")
+    private List<ProductReview> reviews;
+
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
             name = "user_roles",
@@ -58,6 +63,14 @@ public class User extends BaseEntity{
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
 
     public String getUsername() {
@@ -100,19 +113,19 @@ public class User extends BaseEntity{
         this.updatedAt = updatedAt;
     }
 
+    public List<ProductReview> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<ProductReview> reviews) {
+        this.reviews = reviews;
+    }
+
     public Set<Role> getRoles() {
         return roles;
     }
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
-    }
-
-    public Long getVersion() {
-        return version;
-    }
-
-    public void setVersion(Long version) {
-        this.version = version;
     }
 }

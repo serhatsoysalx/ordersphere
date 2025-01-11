@@ -1,6 +1,6 @@
 package com.ordersphere.ordersphere.aop;
 
-import com.ordersphere.ordersphere.dto.LoginRequestDto;
+import com.ordersphere.ordersphere.dto.LoginRequestDTO;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 import org.aspectj.lang.JoinPoint;
@@ -16,9 +16,9 @@ public class LoggingAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
 
-    @Before("execution(* com.ordersphere.ordersphere.controller.LoginController.login(..)) && args(loginRequestDto)")
-    public void logBefore(JoinPoint joinPoint, LoginRequestDto loginRequestDto) {
-        String username = loginRequestDto.getUsername();
+    @Before("execution(* com.ordersphere.ordersphere.controller.LoginController.login(..)) && args(loginRequestDTO)")
+    public void logBefore(JoinPoint joinPoint, LoginRequestDTO loginRequestDTO) {
+        String username = loginRequestDTO.getUsername();
         logger.info("Login request received for username: {}", username);
     }
 
@@ -29,7 +29,7 @@ public class LoggingAspect {
 
     @AfterThrowing(pointcut = "execution(* com.ordersphere.ordersphere.controller.LoginController.login(..))", throwing = "exception")
     public void logAfterThrowing(JoinPoint joinPoint, Throwable exception) {
-        String username = ((LoginRequestDto) joinPoint.getArgs()[0]).getUsername();
+        String username = ((LoginRequestDTO) joinPoint.getArgs()[0]).getUsername();
         logger.error("Login failed for username: {}. Error: {}", username, exception.getMessage());
     }
 }
