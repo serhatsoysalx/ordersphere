@@ -1,15 +1,15 @@
 package com.ordersphere.ordersphere.dto;
 
-public class LoginRequestDto {
+public class LoginRequestDTO {
 
     private String username;
 
     private String password;
 
-    public LoginRequestDto() {
+    public LoginRequestDTO() {
     }
 
-    public LoginRequestDto(String username, String password) {
+    public LoginRequestDTO(String username, String password) {
         this.username = username;
         this.password = password;
     }
@@ -32,7 +32,7 @@ public class LoginRequestDto {
 
     @Override
     public String toString() {
-        return "LoginRequestDto{" +
+        return "LoginRequestDTO{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 '}';

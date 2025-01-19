@@ -1,6 +1,6 @@
 package com.ordersphere.ordersphere.controller;
 
-import com.ordersphere.ordersphere.dto.LoginRequestDto;
+import com.ordersphere.ordersphere.dto.LoginRequestDTO;
 import com.ordersphere.ordersphere.dto.UserDTO;
 import com.ordersphere.ordersphere.service.LoginService;
 import com.ordersphere.ordersphere.util.constants.LoginErrorMessage;
@@ -33,15 +33,15 @@ public class LoginController {
     private JwtUtil jwtUtil;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequestDto loginRequestDto) {
+    public ResponseEntity<String> login(@RequestBody LoginRequestDTO loginRequestDTO) {
         try {
-            final UserDTO user = loginService.login(loginRequestDto);
+            final UserDTO user = loginService.login(loginRequestDTO);
 
             if (user == null || !user.getStatus()) {
                 return buildErrorResponse(LoginErrorMessage.INVALID_CREDENTIALS, HttpStatus.UNAUTHORIZED);
             }
 
-            authenticateUser(loginRequestDto.getUsername(), loginRequestDto.getPassword());
+            authenticateUser(loginRequestDTO.getUsername(), loginRequestDTO.getPassword());
             String token = generateToken(user);
             return new ResponseEntity<>(token, HttpStatus.OK);
 

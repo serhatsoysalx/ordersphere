@@ -18,7 +18,7 @@ public class LoginControllerTest {
 
     @Test
     public void testLogin_ValidCredentials() {
-//        LoginRequestDto loginRequestDto = new LoginRequestDto("srt241", "srt241");
+//        LoginRequestDTO loginRequestDto = new LoginRequestDTO("srt241", "srt241");
 //
 //        UserDTO mockUserDTO = new UserDTO(1L, "srt241", "", "srt241", new HashSet<>());
 //
@@ -37,7 +37,7 @@ public class LoginControllerTest {
 
     @Test
     public void testLogin_InvalidCredentials() {
-//        LoginRequestDto loginRequestDto = new LoginRequestDto("serhat", "wrongpassword");
+//        LoginRequestDTO loginRequestDto = new LoginRequestDTO("serhat", "wrongpassword");
 //        when(loginService.login(loginRequestDto)).thenThrow(new InvalidCredentialsException("Invalid credentials"));
 //        assertThrows(InvalidCredentialsException.class, () -> loginController.login(loginRequestDto));
     }
