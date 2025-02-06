@@ -14,11 +14,13 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    @Column(name = "price", nullable = false)
     private BigDecimal price;
 
     @ManyToOne
@@ -29,36 +31,62 @@ public class Product {
     @JoinColumn(name = "brand_id")
     private Brand brand;
 
+    @Column(name = "created_date")
     private LocalDateTime createdAt;
 
+    @Column(name = "update_date")
     private LocalDateTime updatedAt;
 
+    @Column(name = "status", nullable = false)
     private Boolean isActive;
 
+    @Column(name = "weight", nullable = false)
     private BigDecimal weight;
 
+    @Column(name = "dimensions", nullable = false)
     private String dimensions;
 
+    @Column(name = "sku")
     private String sku;
 
+    @Column(name = "image_url")
     private String imageUrl;
 
+    @Column(name = "barcode", nullable = false)
     private String barcode;
 
+    @Column(name = "images")
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductImage> images;
 
+    @Column(name = "stocks", nullable = false)
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<Stock> stocks;
 
+    @Column(name = "discounts", nullable = false)
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<Discount> discounts;
 
+    @Column(name = "reviews")
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductReview> reviews;
 
+    @Column(name = "price_histories")
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<PriceHistory> priceHistories;
+
+    @PrePersist
+    public void prePersist() {
+        if (this.isActive == null) {
+            this.isActive = Boolean.TRUE;
+        }
+        this.createdAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
 
     public Long getId() {
         return id;

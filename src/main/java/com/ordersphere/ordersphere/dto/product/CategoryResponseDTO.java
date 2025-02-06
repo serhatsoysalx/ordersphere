@@ -1,13 +1,9 @@
 package com.ordersphere.ordersphere.dto.product;
 
 import com.ordersphere.ordersphere.entity.product.Category;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 
-@Getter
-@Setter
 public class CategoryResponseDTO {
 
     private Long id;
@@ -28,6 +24,46 @@ public class CategoryResponseDTO {
         this.name = name;
         this.description = description;
         this.parentCategory = parentCategory;
+        this.subCategories = subCategories;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Category getParentCategory() {
+        return parentCategory;
+    }
+
+    public void setParentCategory(Category parentCategory) {
+        this.parentCategory = parentCategory;
+    }
+
+    public List<Category> getSubCategories() {
+        return subCategories;
+    }
+
+    public void setSubCategories(List<Category> subCategories) {
         this.subCategories = subCategories;
     }
 }
