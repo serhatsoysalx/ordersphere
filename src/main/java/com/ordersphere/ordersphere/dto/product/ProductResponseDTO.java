@@ -1,13 +1,8 @@
 package com.ordersphere.ordersphere.dto.product;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.math.BigDecimal;
 import java.util.List;
 
-@Getter
-@Setter
 public class ProductResponseDTO {
 
     private Long id;
@@ -64,6 +59,142 @@ public class ProductResponseDTO {
         this.stocks = stocks;
         this.discounts = discounts;
         this.reviews = reviews;
+        this.priceHistories = priceHistories;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public CategoryResponseDTO getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryResponseDTO category) {
+        this.category = category;
+    }
+
+    public BrandResponseDTO getBrand() {
+        return brand;
+    }
+
+    public void setBrand(BrandResponseDTO brand) {
+        this.brand = brand;
+    }
+
+    public String getSku() {
+        return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
+    }
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
+    }
+
+    public BigDecimal getWeight() {
+        return weight;
+    }
+
+    public void setWeight(BigDecimal weight) {
+        this.weight = weight;
+    }
+
+    public String getDimensions() {
+        return dimensions;
+    }
+
+    public void setDimensions(String dimensions) {
+        this.dimensions = dimensions;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public List<ProductImageDTO> getImages() {
+        return images;
+    }
+
+    public void setImages(List<ProductImageDTO> images) {
+        this.images = images;
+    }
+
+    public List<StockDTO> getStocks() {
+        return stocks;
+    }
+
+    public void setStocks(List<StockDTO> stocks) {
+        this.stocks = stocks;
+    }
+
+    public List<DiscountDTO> getDiscounts() {
+        return discounts;
+    }
+
+    public void setDiscounts(List<DiscountDTO> discounts) {
+        this.discounts = discounts;
+    }
+
+    public List<ProductReviewDTO> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<ProductReviewDTO> reviews) {
+        this.reviews = reviews;
+    }
+
+    public List<PriceHistoryDTO> getPriceHistories() {
+        return priceHistories;
+    }
+
+    public void setPriceHistories(List<PriceHistoryDTO> priceHistories) {
         this.priceHistories = priceHistories;
     }
 }
